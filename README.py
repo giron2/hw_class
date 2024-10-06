@@ -21,6 +21,10 @@ class Student:
     def __str__(self):
         return f"Имя: {self.name} \nФамилия: {self.surname}\nСредняя оценка за домашние задания: {sum(self.grad) / len(self.grad)} \nКурсы в процессе изучения: {', '.join(self.courses_in_progress)} \nЗавершенные курсы: {', '.join(self.finished_courses)}"
 
+    def __lt__(self, other):
+        a = sum(self.grad) / len(self.grad)
+        b = sum(other.grad) / len(other.grad)
+        return a < b
 
 class Mentor:
     def __init__(self, name, surname):
@@ -37,6 +41,10 @@ class Lecturer(Mentor):
         self.grad = []
     def __str__(self):
         return f"Имя: {self.name}\nФамилия: {self.surname}\nСредняя оценка за лекции: {sum(self.grad) / len(self.grad)}"
+    def __lt__(self, other):
+        a = sum(self.grad) / len(self.grad)
+        b = sum(other.grad) / len(other.grad)
+        return a < b
 class Reviewer(Mentor):
     def __init__(self, name, surname):
         super().__init__(name, surname)
@@ -144,5 +152,9 @@ print(lec2)
 print(rew1)
 print(rew2)
 
-print((sum(lec2.grad)/len(lec2.grad)) < (sum(lec1.grad)/len(lec2.grad)))
-print((sum(stud1.grad)/len(stud1.grad)) > (sum(stud2.grad)/len(stud2.grad)))
+
+print(stud2 < stud1)
+print(stud1 < stud2)
+
+print(lec2 < lec1)
+print(lec1 < lec2)
